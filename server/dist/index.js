@@ -1,15 +1,29 @@
 "use strict";
 
 var _express = _interopRequireDefault(require("express"));
+var _dotenv = _interopRequireDefault(require("dotenv"));
+var _connection = _interopRequireDefault(require("./database/connection"));
+var _auth = _interopRequireDefault(require("./database/api/auth"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+// Database connection
+
+_dotenv.default.config();
 const zomato = (0, _express.default)();
 zomato.use(_express.default.json());
 zomato.get("/", (req, res) => {
   res.json({
-    message: "server is running"
+    message: "Server is running"
   });
 });
-const port = 4000;
-zomato.listen(port, () => {
-  console.log("server is running!!!");
+
+// /auth/signup
+zomato.use("/auth", _auth.default);
+const PORT = 4000;
+zomato.listen(PORT, () => {
+  (0, _connection.default)().then(() => {
+    console.log("Server is running !!!");
+  }).catch(error => {
+    console.log("Server is running, but database connection failed...");
+    console.log(error);
+  });
 });

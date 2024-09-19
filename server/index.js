@@ -13,6 +13,10 @@ import Auth from "./database/api/auth";
 import Food from "./database/api/food";
 import Restaurant from "./database/api/restaurant";
 import User from "./database/api/user";
+import Menu from "./database/api/menu"
+import Order from "./database/api/order"
+import Review from "./database/api/review";
+
 
 dotenv.config();
 
@@ -23,7 +27,7 @@ const zomato = express();
 // adding additional passport configuration
 
 zomato.use(express.json());
-zomato.use(session({ secret: "ZomatoApp" }));
+zomato.use(session({ secret: process.env.JWTSECRET }));
 zomato.use(passport.initialize());
 zomato.use(passport.session());
 
@@ -37,7 +41,10 @@ zomato.get("/", (req, res) => {
 zomato.use("/auth", Auth);
 zomato.use("/food", Food);
 zomato.use("/restaurant", Restaurant);
-zomato.use("/user", passport.authenticate("jwt", { session: false }), User);
+zomato.use("/user", User);
+zomato.use("/menu", Menu);
+zomato.use("/order", Order);
+zomato.use("/review", Review);
 
 const PORT = 4000;
 

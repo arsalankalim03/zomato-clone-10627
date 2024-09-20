@@ -16,6 +16,7 @@ import User from "./database/api/user";
 import Menu from "./database/api/menu"
 import Order from "./database/api/order"
 import Review from "./database/api/review";
+import Image from "./database/api/images"
 
 
 dotenv.config();
@@ -45,6 +46,7 @@ zomato.use("/user", User);
 zomato.use("/menu", Menu);
 zomato.use("/order", Order);
 zomato.use("/review", Review);
+zomato.use("/image", Image);
 
 const PORT = 4000;
 

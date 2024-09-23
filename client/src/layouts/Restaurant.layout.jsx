@@ -12,15 +12,15 @@ import Navbar from "../components/Navbar";
 // import CartContainer from "../components/Cart/CartContainer";
 
 const RestaurantLayout =
-    (Component) =>
-        ({ ...props }) => {
-            return (
-                <>
-                    <Navbar />
-                    <Component {...props} />
-                </>
-            );
-        };
+  (Component) =>
+    ({ ...props }) => {
+      return (
+        <>
+          <Navbar />
+          <Component {...props} />
+        </>
+      );
+    };
 export default RestaurantLayout;
 
 
